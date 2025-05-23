@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
@@ -15,6 +16,18 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     location,
     episode: episodes
   } = content;
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [visible]);
 
   function togglePopup(e) {
     if (e.currentTarget !== e.target) {
