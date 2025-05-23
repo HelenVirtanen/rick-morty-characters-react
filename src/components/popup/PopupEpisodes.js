@@ -26,6 +26,11 @@ export function PopupEpisodes({ episodes }) {
         } else {
           setSeries(data);
         }
+
+        // added timeout to check loader
+        setTimeout(() => {
+          setIsFetching(false);
+        }, 500);
       });
   }, [episodes]);
 
