@@ -20,30 +20,39 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
   useEffect(() => {
     if (visible) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+
+      const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
+          setSettings((prevState) => ({ ...prevState, visible: false }));
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
     }
+  }, [visible, setSettings]);
 
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [visible]);
-
-  function togglePopup(e) {
-    if (e.currentTarget !== e.target) {
-      return;
+  function handleOverlayClick(event) {
+    if (event.currentTarget === event.target) {
+      setSettings((prevState) => ({ ...prevState, visible: false }));
     }
-
-    setSettings((prevState) => ({
-      ...prevState,
-      visible: !prevState.visible
-    }));
   }
 
   return (
-    <PopupContainer visible={visible}>
+    <PopupContainer visible={visible} onClick={handleOverlayClick}>
       <StyledPopup>
-        <CloseIcon onClick={togglePopup} />
+        <CloseIcon
+          onClick={() =>
+            setSettings((prevState) => ({
+              ...prevState,
+              visible: false
+            }))
+          }
+        />
 
         <PopupHeader
           name={name}
