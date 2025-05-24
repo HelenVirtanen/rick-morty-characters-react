@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Popup } from './popup';
-import { Filters } from './header/Filter';
 import { useData } from './providers';
 import { Card } from './Card';
 
