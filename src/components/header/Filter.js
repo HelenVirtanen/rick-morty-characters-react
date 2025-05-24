@@ -58,12 +58,17 @@ const StyledFilter = styled.div`
 
 const Select = styled.select`
   grid-area: ${(props) => props.area};
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px 12px 12px 16px;
+  border-radius: 8px;
   background-color: #001f3f;
   color: #b3b3b3;
   border: 1px solid #83bf46;
   font-size: 14px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="%23b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M4 6l4 4 4-4"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;
+  background-size: 16px;
 
   &:focus {
     outline: none;
@@ -78,8 +83,8 @@ const Select = styled.select`
 
 const Input = styled.input`
   grid-area: ${(props) => props.area};
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px 16px;
+  border-radius: 8px;
   background-color: #001f3f;
   color: #b3b3b3;
   border: 1px solid #83bf46;
@@ -111,8 +116,8 @@ const ButtonContainer = styled.div`
 
 const Button = styled.button`
   flex: 1;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px 21px;
+  border-radius: 8px;
   font-size: 14px;
   color: ${(props) => (props.apply ? '#83bf46' : '#ff5152')};
   background-color: transparent;
@@ -123,6 +128,10 @@ const Button = styled.button`
   &:hover {
     background-color: ${(props) => (props.apply ? '#83bf46' : '#ff5152')};
     color: #f5f5f5;
+  }
+
+  @media (max-width: 950px) {
+    padding: 12px 13px;
   }
 
   @media (max-width: 530px) {
