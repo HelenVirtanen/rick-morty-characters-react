@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { Logo } from './Logo';
 import { Filters } from './Filter';
 
-export function Header() {
+export function Header({ filters, setFilters }) {
   return (
     <HeaderContainer>
       <Logo />
-      <Filters />
+      <Filters filters={filters} setFilters={setFilters} />
     </HeaderContainer>
   );
 }

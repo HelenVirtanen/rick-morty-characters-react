@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Popup } from './popup';
+import { Filters } from './header/Filter';
 import { useData } from './providers';
 import { Card } from './Card';
 
@@ -9,7 +10,7 @@ const defaultPopupSettings = {
   content: {}
 };
 
-export function ItemsGrid() {
+export function ItemsGrid({ filters }) {
   const { characters } = useData();
   const [popupSettings, setPopupSettings] = useState(defaultPopupSettings);
 
@@ -20,22 +21,37 @@ export function ItemsGrid() {
     });
   }
 
+  const filteredCharacters = characters.filter((character) => {
+    return (
+      (!filters.status || character.status.toLowerCase() === filters.status) &&
+      (!filters.gender || character.gender.toLowerCase() === filters.gender) &&
+      (!filters.species ||
+        character.species.toLowerCase() === filters.species) &&
+      (!filters.name ||
+        character.name.toLowerCase().includes(filters.name.toLowerCase())) &&
+      (!filters.type ||
+        character.type.toLowerCase().includes(filters.type.toLowerCase()))
+    );
+  });
+
   if (!characters.length) {
     return null;
   }
 
   return (
-    <Container>
-      {characters.map((props) => (
-        <Card
-          key={props.id}
-          onClickHandler={() => cardOnClickHandler(props)}
-          {...props}
-        />
-      ))}
+    <>
+      <Container>
+        {filteredCharacters.map((props) => (
+          <Card
+            key={props.id}
+            onClickHandler={() => cardOnClickHandler(props)}
+            {...props}
+          />
+        ))}
 
-      <Popup settings={popupSettings} setSettings={setPopupSettings} />
-    </Container>
+        <Popup settings={popupSettings} setSettings={setPopupSettings} />
+      </Container>
+    </>
   );
 }
 

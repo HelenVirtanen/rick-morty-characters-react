@@ -1,29 +1,74 @@
 import styled from 'styled-components';
 
-export function Filters() {
+export function Filters({ filters, setFilters }) {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleReset = () => {
+    setFilters({
+      status: '',
+      gender: '',
+      species: '',
+      name: '',
+      type: ''
+    });
+  };
+
   return (
     <StyledFilter>
-      <Select area="status">
+      <Select
+        name="status"
+        area="status"
+        onChange={handleInputChange}
+        value={filters.status}
+      >
         <option value="">Status</option>
         <option value="alive">Alive</option>
         <option value="dead">Dead</option>
       </Select>
-      <Select area="gender">
+      <Select
+        name="gender"
+        area="gender"
+        onChange={handleInputChange}
+        value={filters.gender}
+      >
         <option value="">Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </Select>
-      <Select area="species">
+      <Select
+        name="species"
+        area="species"
+        onChange={handleInputChange}
+        value={filters.species}
+      >
         <option value="">Species</option>
         <option value="human">Human</option>
         <option value="alien">Alien</option>
       </Select>
-      {/* Вторая строка: Name, Type, Buttons */}
-      <Input area="name" type="text" placeholder="Name" />
-      <Input area="type" type="text" placeholder="Type" />
+      <Input
+        name="name"
+        area="name"
+        type="text"
+        placeholder="Name"
+        onChange={handleInputChange}
+        value={filters.name}
+      />
+      <Input
+        name="type"
+        area="type"
+        type="text"
+        placeholder="Type"
+        onChange={handleInputChange}
+        value={filters.type}
+      />
       <ButtonContainer>
-        <Button apply>Apply</Button>
-        <Button>Reset</Button>
+        <Button apply onClick={() => setFilters((prev) => ({ ...prev }))}>
+          Apply
+        </Button>
+        <Button onClick={handleReset}>Reset</Button>
       </ButtonContainer>
     </StyledFilter>
   );
