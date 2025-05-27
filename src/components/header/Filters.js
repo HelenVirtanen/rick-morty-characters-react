@@ -27,6 +27,7 @@ export function Filters({ filters, setFilters }) {
         <option value="">Status</option>
         <option value="alive">Alive</option>
         <option value="dead">Dead</option>
+        <option value="unknown">Unknown</option>
       </Select>
       <Select
         name="gender"
@@ -37,6 +38,8 @@ export function Filters({ filters, setFilters }) {
         <option value="">Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
+        <option value="genderless">Genderless</option>
+        <option value="unknown">Unknown</option>
       </Select>
       <Select
         name="species"
