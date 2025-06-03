@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useData } from '../providers';
 import { useState } from 'react';
+import { CustomSelect } from './CustomSelect';
 
 export function Filters() {
   const [filters, setFilters] = useState({
@@ -31,10 +32,8 @@ export function Filters() {
   };
 
   const handleReset = () => {
-    // Получаем текщий URL
     const urlFull = new URL(apiURL);
 
-    // Собираем URL без параметров для сброса
     const baseUrl = urlFull.origin + urlFull.pathname;
     setFilters(() => ({
       status: '',
@@ -44,45 +43,47 @@ export function Filters() {
       type: ''
     }));
 
-    // Меняем URL в провайдере, который в свою очередь при изменении вызовет новы запрос
     setApiURL(baseUrl);
   };
 
   return (
     <StyledFilter>
-      <Select
+      <CustomSelect
         name="status"
         area="status"
         onChange={handleInputChange}
         value={filters.status}
-      >
-        <option value="">Status</option>
-        <option value="alive">Alive</option>
-        <option value="dead">Dead</option>
-        <option value="unknown">Unknown</option>
-      </Select>
-      <Select
+        options={[
+          { value: '', label: 'Status' },
+          { value: 'alive', label: 'Alive' },
+          { value: 'dead', label: 'Dead' },
+          { value: 'unknown', label: 'Unknown' }
+        ]}
+      />
+      <CustomSelect
         name="gender"
         area="gender"
         onChange={handleInputChange}
         value={filters.gender}
-      >
-        <option value="">Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="genderless">Genderless</option>
-        <option value="unknown">Unknown</option>
-      </Select>
-      <Select
+        options={[
+          { value: '', label: 'Gender' },
+          { value: 'male', label: 'Male' },
+          { value: 'female', label: 'Female' },
+          { value: 'genderless', label: 'Genderless' },
+          { value: 'unknown', label: 'Unknown' }
+        ]}
+      />
+      <CustomSelect
         name="species"
         area="species"
         onChange={handleInputChange}
         value={filters.species}
-      >
-        <option value="">Species</option>
-        <option value="human">Human</option>
-        <option value="alien">Alien</option>
-      </Select>
+        options={[
+          { value: '', label: 'Species' },
+          { value: 'human', label: 'Human' },
+          { value: 'alien', label: 'Alien' }
+        ]}
+      />
       <Input
         name="name"
         area="name"
@@ -136,31 +137,6 @@ const StyledFilter = styled.div`
   }
 `;
 
-const Select = styled.select`
-  grid-area: ${(props) => props.area};
-  padding: 12px 12px 12px 16px;
-  border-radius: 8px;
-  background-color: #001f3f;
-  color: #b3b3b3;
-  border: 1px solid #83bf46;
-  font-size: 14px;
-  appearance: none;
-  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="%23b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M4 6l4 4 4-4"/%3E%3C/svg%3E');
-  background-repeat: no-repeat;
-  background-position: calc(100% - 12px) center;
-  background-size: 16px;
-
-  &:focus {
-    outline: none;
-    border-color: #83bf46;
-  }
-
-  @media (max-width: 530px) {
-    width: 240px;
-    margin: 0 auto;
-  }
-`;
-
 const Input = styled.input`
   grid-area: ${(props) => props.area};
   padding: 12px 16px;
@@ -168,7 +144,7 @@ const Input = styled.input`
   background-color: #001f3f;
   color: #b3b3b3;
   border: 1px solid #83bf46;
-  font-size: 14px;
+  font-size: 16px;
   display: block;
   width: 100%;
   white-space: nowrap;
@@ -208,7 +184,7 @@ const Button = styled.button`
   flex: 1;
   padding: 12px 21px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 16px;
   color: ${(props) => (props.apply ? '#83bf46' : '#ff5152')};
   background-color: transparent;
   border: 1px solid ${(props) => (props.apply ? '#83bf46' : '#ff5152')};
