@@ -36,7 +36,7 @@ export function Filters() {
 
     // Собираем URL без параметров для сброса
     const baseUrl = urlFull.origin + urlFull.pathname;
-    setFilters((prev) => ({
+    setFilters(() => ({
       status: '',
       gender: '',
       species: '',
@@ -169,10 +169,20 @@ const Input = styled.input`
   color: #b3b3b3;
   border: 1px solid #83bf46;
   font-size: 14px;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:focus {
     outline: none;
     border-color: #83bf46;
+  }
+
+  &:active,
+  &:hover {
+    background-color: #334466;
   }
 
   @media (max-width: 530px) {
