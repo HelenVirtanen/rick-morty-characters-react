@@ -1,26 +1,18 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { Pagination, ItemsGrid, useData, Header, AppState } from './components';
 
 export function App() {
   const { isFetching, isError } = useData();
-  const [filters, setFilters] = useState({
-    status: '',
-    gender: '',
-    species: '',
-    name: '',
-    type: ''
-  });
 
   return (
     <Main>
-      <Header filters={filters} setFilters={setFilters} />
+      <Header />
 
       <AppState />
 
       {!isFetching && !isError && (
         <>
-          <ItemsGrid filters={filters} />
+          <ItemsGrid />
 
           <Pagination />
         </>

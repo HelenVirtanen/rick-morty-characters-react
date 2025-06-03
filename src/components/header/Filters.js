@@ -1,19 +1,51 @@
 import styled from 'styled-components';
+import { useData } from '../providers';
+import { useState } from 'react';
 
-export function Filters({ filters, setFilters }) {
+export function Filters() {
+  const [filters, setFilters] = useState({
+    status: '',
+    gender: '',
+    species: '',
+    name: '',
+    type: ''
+  });
+  const { apiURL, setApiURL } = useData();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleFilter = () => {
+    const urlWithFilters = new URL(apiURL);
+    const filterParams = Object.entries(filters);
+
+    filterParams.forEach(([key, value]) => {
+      value && urlWithFilters.searchParams.set(key, value);
+    });
+
+    if (urlWithFilters.searchParams.size > 0) {
+      setApiURL(urlWithFilters);
+    }
+  };
+
   const handleReset = () => {
-    setFilters({
+    // Получаем текщий URL
+    const urlFull = new URL(apiURL);
+
+    // Собираем URL без параметров для сброса
+    const baseUrl = urlFull.origin + urlFull.pathname;
+    setFilters((prev) => ({
       status: '',
       gender: '',
       species: '',
       name: '',
       type: ''
-    });
+    }));
+
+    // Меняем URL в провайдере, который в свою очередь при изменении вызовет новы запрос
+    setApiURL(baseUrl);
   };
 
   return (
@@ -68,7 +100,7 @@ export function Filters({ filters, setFilters }) {
         value={filters.type}
       />
       <ButtonContainer>
-        <Button apply onClick={() => setFilters((prev) => ({ ...prev }))}>
+        <Button apply onClick={handleFilter}>
           Apply
         </Button>
         <Button onClick={handleReset}>Reset</Button>

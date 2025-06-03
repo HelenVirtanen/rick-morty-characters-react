@@ -20,19 +20,6 @@ export function ItemsGrid({ filters }) {
     });
   }
 
-  const filteredCharacters = characters.filter((character) => {
-    return (
-      (!filters.status || character.status.toLowerCase() === filters.status) &&
-      (!filters.gender || character.gender.toLowerCase() === filters.gender) &&
-      (!filters.species ||
-        character.species.toLowerCase() === filters.species) &&
-      (!filters.name ||
-        character.name.toLowerCase().includes(filters.name.toLowerCase())) &&
-      (!filters.type ||
-        character.type.toLowerCase().includes(filters.type.toLowerCase()))
-    );
-  });
-
   if (!characters.length) {
     return null;
   }
@@ -40,7 +27,7 @@ export function ItemsGrid({ filters }) {
   return (
     <>
       <Container>
-        {filteredCharacters.map((props) => (
+        {characters.map((props) => (
           <Card
             key={props.id}
             onClickHandler={() => cardOnClickHandler(props)}
