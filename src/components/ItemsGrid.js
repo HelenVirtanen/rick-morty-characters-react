@@ -9,7 +9,7 @@ const defaultPopupSettings = {
   content: {}
 };
 
-export function ItemsGrid({ filters }) {
+export function ItemsGrid() {
   const { characters } = useData();
   const [popupSettings, setPopupSettings] = useState(defaultPopupSettings);
 
