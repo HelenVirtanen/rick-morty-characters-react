@@ -81,7 +81,8 @@ export function Filters() {
         options={[
           { value: '', label: 'Species' },
           { value: 'human', label: 'Human' },
-          { value: 'alien', label: 'Alien' }
+          { value: 'alien', label: 'Alien' },
+          { value: 'humanoid', label: 'Humanoid' }
         ]}
       />
       <Input
