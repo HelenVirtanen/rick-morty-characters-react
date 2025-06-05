@@ -32,7 +32,7 @@ const PopupStatus = styled(CardStatus)`
 const PopupImage = styled.img`
   display: block;
   border-radius: 5px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   object-fit: cover;
   width: 100%;
   height: 100%;
