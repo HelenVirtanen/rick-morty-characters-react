@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
 // Added CustomSelect to meet style conditions in Figma
@@ -21,17 +21,34 @@ export function CustomSelect({ options, name, value, onChange, placeholder }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleOptionClick = (val) => {
-    onChange({ target: { name, value: val } });
-    setOpen(false);
-  };
+  const toggleDropdown = useCallback(() => {
+    setOpen((prevOpen) => !prevOpen);
+  }, []);
+
+  const handleOptionClick = useCallback(
+    (val) => {
+      onChange({ target: { name, value: val } });
+      setOpen(false);
+    },
+    [name, onChange]
+  );
+
+  const optionClickHandlers = useMemo(
+    () =>
+      options.reduce((acc, opt) => {
+        acc[opt.value] = () => handleOptionClick(opt.value);
+
+        return acc;
+      }, {}),
+    [options, handleOptionClick]
+  );
 
   const selectedLabel =
     options.find((opt) => opt.value === value)?.label || placeholder;
 
   return (
     <SelectContainer ref={containerRef}>
-      <Selected onClick={() => setOpen(!open)}>
+      <Selected onClick={toggleDropdown}>
         {selectedLabel}
         <Arrow open={open} />
       </Selected>
@@ -41,7 +58,7 @@ export function CustomSelect({ options, name, value, onChange, placeholder }) {
             <Option
               key={opt.value}
               selected={opt.value === value}
-              onClick={() => handleOptionClick(opt.value)}
+              onClick={optionClickHandlers[opt.value]}
             >
               {opt.label}
             </Option>
