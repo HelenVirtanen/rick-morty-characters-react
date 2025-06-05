@@ -54,7 +54,6 @@ export function CustomSelect({ options, name, value, onChange, placeholder }) {
 
 const SelectContainer = styled.div`
   position: relative;
-  width: 180px;
   user-select: none;
   grid-area: ${(props) => props.area || 'auto'};
 
