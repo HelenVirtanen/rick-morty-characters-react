@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
@@ -36,23 +36,23 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     }
   }, [visible, setSettings]);
 
-  function handleOverlayClick(event) {
-    if (event.currentTarget === event.target) {
-      setSettings((prevState) => ({ ...prevState, visible: false }));
-    }
-  }
+  const handleOverlayClick = useCallback(
+    (event) => {
+      if (event.currentTarget === event.target) {
+        setSettings((prevState) => ({ ...prevState, visible: false }));
+      }
+    },
+    [setSettings]
+  );
+
+  const handleCloseClick = useCallback(() => {
+    setSettings((prevState) => ({ ...prevState, visible: false }));
+  }, [setSettings]);
 
   return (
     <PopupContainer visible={visible} onClick={handleOverlayClick}>
       <StyledPopup>
-        <CloseIcon
-          onClick={() =>
-            setSettings((prevState) => ({
-              ...prevState,
-              visible: false
-            }))
-          }
-        />
+        <CloseIcon onClick={handleCloseClick} />
 
         <PopupHeader
           name={name}
