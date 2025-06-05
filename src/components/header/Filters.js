@@ -18,7 +18,7 @@ export function Filters() {
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFilter = () => {
+  const handleFilter = function () {
     const urlWithFilters = new URL(apiURL);
     const filterParams = Object.entries(filters);
 
@@ -31,7 +31,7 @@ export function Filters() {
     }
   };
 
-  const handleReset = () => {
+  const handleReset = function () {
     const urlFull = new URL(apiURL);
 
     const baseUrl = urlFull.origin + urlFull.pathname;
