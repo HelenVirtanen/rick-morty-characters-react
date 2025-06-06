@@ -6,6 +6,10 @@ export function CustomSelect({ options, name, value, onChange, placeholder }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef();
 
+  const handleSelectedClick = useCallback(() => {
+    setOpen((prevOpen) => !prevOpen);
+  }, []);
+
   // Close options list within component
   useEffect(() => {
     function handleClickOutside(event) {
