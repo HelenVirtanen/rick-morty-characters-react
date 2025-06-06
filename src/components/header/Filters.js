@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useData } from '../providers';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { CustomSelect } from './CustomSelect';
 
 export function Filters() {
@@ -13,12 +13,12 @@ export function Filters() {
   });
   const { apiURL, setApiURL } = useData();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
-  const handleFilter = function () {
+  const handleFilter = useCallback(() => {
     const urlWithFilters = new URL(apiURL);
     const filterParams = Object.entries(filters);
 
@@ -29,9 +29,9 @@ export function Filters() {
     if (urlWithFilters.searchParams.size > 0) {
       setApiURL(urlWithFilters);
     }
-  };
+  }, [apiURL, filters, setApiURL]);
 
-  const handleReset = function () {
+  const handleReset = useCallback(() => {
     const urlFull = new URL(apiURL);
 
     const baseUrl = urlFull.origin + urlFull.pathname;
@@ -44,7 +44,7 @@ export function Filters() {
     }));
 
     setApiURL(baseUrl);
-  };
+  }, [apiURL, setApiURL]);
 
   return (
     <StyledFilter>
