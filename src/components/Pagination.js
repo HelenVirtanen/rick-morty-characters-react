@@ -32,15 +32,19 @@ export function Pagination() {
   }, [pageClickHandler, pages]);
 
   useEffect(() => {
-    const createdPages = Array.from({ length: info.pages }, (_, i) => {
-      const URLWithPage = new URL(apiURL);
+    if (info.pages > 0) {
+      const createdPages = Array.from({ length: info.pages }, (_, i) => {
+        const URLWithPage = new URL(apiURL);
 
-      URLWithPage.searchParams.set('page', i + 1);
+        URLWithPage.searchParams.set('page', i + 1);
 
-      return URLWithPage;
-    });
+        return URLWithPage.toString();
+      });
 
-    setPages(createdPages);
+      setPages(createdPages);
+    } else {
+      setPages([]);
+    }
   }, [info, apiURL]);
 
   if (pages.length <= 1) return null;
