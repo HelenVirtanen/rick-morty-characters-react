@@ -82,7 +82,14 @@ export function Filters() {
           { value: '', label: 'Species' },
           { value: 'human', label: 'Human' },
           { value: 'alien', label: 'Alien' },
-          { value: 'humanoid', label: 'Humanoid' }
+          { value: 'humanoid', label: 'Humanoid' },
+          { value: 'poopybutthole', label: 'Poopybutthole' },
+          { value: 'mythological creature', label: 'Mythological Creature' },
+          { value: 'animal', label: 'Animal' },
+          { value: 'robot', label: 'Robot' },
+          { value: 'cronenberg', label: 'Cronenberg' },
+          { value: 'disease', label: 'Disease' },
+          { value: 'unknown', label: 'Unknown' }
         ]}
       />
       <Input
