@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/rick-morty-characters-react/static/css/main.e3187953.css",
+    "main.js": "/rick-morty-characters-react/static/js/main.4281b9a8.js",
+    "static/media/green-portal.png": "/rick-morty-characters-react/static/media/green-portal.a218ca229093de6f08d2.png",
+    "static/media/widget-logo.png": "/rick-morty-characters-react/static/media/widget-logo.42c8df0b92603ef2e2e2.png",
+    "static/media/male.svg": "/rick-morty-characters-react/static/media/male.7bbbeb1055010a511433c47790115f98.svg",
+    "index.html": "/rick-morty-characters-react/index.html",
+    "static/media/genderless.svg": "/rick-morty-characters-react/static/media/genderless.9f6e7477fbf5fd3401cd6c66b9f43207.svg",
+    "static/media/female.svg": "/rick-morty-characters-react/static/media/female.272db8f9fd290243e8a5bdf67cda1192.svg",
+    "main.e3187953.css.map": "/rick-morty-characters-react/static/css/main.e3187953.css.map",
+    "main.4281b9a8.js.map": "/rick-morty-characters-react/static/js/main.4281b9a8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e3187953.css",
+    "static/js/main.4281b9a8.js"
+  ]
+}
