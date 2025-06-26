@@ -1,4 +1,5 @@
 # Rick and Morty Characters React
+[Посмотреть на Netlify](https://virtanen-rickandmorty.netlify.app/)
 
 ## 📚 Описание
 
