@@ -1,5 +1,7 @@
 # Rick and Morty Characters React
 
+[Посмотреть на GitHub Pages](https://helenvirtanen.github.io/rick-morty-characters-react/)
+
 [Посмотреть на Netlify](https://virtanen-rickandmorty.netlify.app/)
 
 ## 📚 Описание
