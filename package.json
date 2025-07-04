@@ -2,12 +2,13 @@
   "name": "elfsight-test-task",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://HelenVirtanen.github.io/rick-morty-characters-react",
+  "homepage": ".",
   "scripts": {
     "predeploy": "npm run build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "deploy": "gh-pages -d build",
+    "deploy:gh": "npm run build && gh-pages -d build",
+    "deploy:netlify": "npm run build",
     "lint": "eslint --fix --ext .js,.jsx . && npx prettier --write \"src/**/*.js\""
   },
   "dependencies": {
